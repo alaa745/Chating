@@ -7,7 +7,7 @@ plugins {
 }
 
 buildscript {
-    val hilt_version = "2.44"
+    val hilt_version = "2.51.1"
 
     dependencies {
         // Add the following line

@@ -17,7 +17,9 @@ import com.example.chatapp.presentation.WelcomeScreen
 import com.example.chatapp.ui.theme.ChatAppTheme
 import com.example.todoapp.destination.MobileNumberScreen
 import com.example.todoapp.destination.Welcome
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
