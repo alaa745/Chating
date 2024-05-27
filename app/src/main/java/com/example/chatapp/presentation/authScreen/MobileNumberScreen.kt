@@ -1,6 +1,9 @@
 package com.example.chatapp.presentation.authScreen
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,11 +30,14 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
@@ -39,19 +45,26 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.todoapp.destination.Welcome
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MobileNumberScreen(navController: NavHostController) {
+fun MobileNumberScreen(navController: NavHostController , authViewModel: AuthViewModel = hiltViewModel()) {
     val scrollableState = rememberScrollState()
     val keyboardController = LocalSoftwareKeyboardController.current
     val density = LocalDensity.current
     val phoneNumber = rememberSaveable {
         mutableStateOf("")
     }
+    val isLoading by authViewModel.isLoading.collectAsState()
+    val message by authViewModel.message.collectAsState()
+    val isCodeSent by authViewModel.isCodeSent.collectAsState()
+
+
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             TopAppBar(title = { /*TODO*/ }, navigationIcon = {
@@ -124,16 +137,16 @@ fun MobileNumberScreen(navController: NavHostController) {
                 ) {
                     Button(
                         onClick = {
-                            navController.navigate(com.example.todoapp.destination.MobileNumberScreen.route) {
-                                popUpTo(Welcome.route)
-                            }
+                                  authViewModel.sendVerificationCode(phoneNumber = phoneNumber.value , activity = context as Activity)
                         },
                         modifier = Modifier.size(width = 327.dp, height = 52.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF002DE3))
                     ) {
-                        Text(text = "Continue", fontWeight = FontWeight.Medium, fontSize = 17.sp)
+                        Text(text = "Send Code", fontWeight = FontWeight.Medium, fontSize = 17.sp)
                     }
                 }
+                if (isCodeSent)
+                    Toast.makeText(context , message , Toast.LENGTH_LONG).show()
             }
         }
     )

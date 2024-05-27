@@ -4,6 +4,7 @@ import com.example.chatapp.data.datasource.AuthDataSourceImpl
 import com.example.chatapp.data.repository.AuthRepositoryImpl
 import com.example.chatapp.domain.datasource.AuthDataSource
 import com.example.chatapp.domain.repository.AuthRepository
+import com.example.chatapp.domain.usecase.SendVerificationCodeUseCase
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -22,10 +23,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesAuthDataSourceImpl(auth: FirebaseAuth): AuthDataSource = AuthDataSourceImpl(auth = auth)
+    fun providesAuthDataSource(auth: FirebaseAuth): AuthDataSource = AuthDataSourceImpl(auth = auth)
 
     @Provides
     @Singleton
     fun providesAuthRepository(authDataSource: AuthDataSource): AuthRepository = AuthRepositoryImpl(authDataSource)
+
+    @Provides
+    @Singleton
+    fun providesSendVerificationCodeUseCase(authRepository: AuthRepository): SendVerificationCodeUseCase = SendVerificationCodeUseCase(authRepository = authRepository)
+
 
 }
