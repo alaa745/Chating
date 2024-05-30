@@ -1,11 +1,9 @@
 package com.example.chatapp.data.repository
 
 import android.app.Activity
-import com.example.chatapp.data.datasource.AuthDataSourceImpl
 import com.example.chatapp.domain.datasource.AuthDataSource
 import com.example.chatapp.domain.repository.AuthRepository
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

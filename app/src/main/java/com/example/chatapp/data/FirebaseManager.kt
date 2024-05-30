@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import kotlin.math.log
 
 class FirebaseManager @Inject constructor(private val firebaseAuth: FirebaseAuth) {
     private var verificationId: String? = null

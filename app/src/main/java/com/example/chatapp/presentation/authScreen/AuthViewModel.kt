@@ -1,7 +1,6 @@
 package com.example.chatapp.presentation.authScreen
 
 import android.app.Activity
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.chatapp.domain.usecase.SendVerificationCodeUseCase

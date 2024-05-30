@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.gms.google-services")
     id("com.google.dagger.hilt.android" )
+    id("kotlin-parcelize")
 }
 
 android {
@@ -64,7 +65,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+//    implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -73,6 +74,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    // Retrofit dependencies
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    // OkHttp logging interceptor (optional, for logging HTTP requests and responses)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
+    implementation ("com.github.bumptech.glide:compose:1.0.0-beta01")
+    implementation("io.coil-kt:coil-compose:2.6.0")
     implementation (platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation ("com.google.firebase:firebase-auth-ktx") // Add this line
     // Hilt dependencies
