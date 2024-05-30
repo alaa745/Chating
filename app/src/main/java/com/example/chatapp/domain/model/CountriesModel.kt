@@ -1,3 +1,5 @@
 package com.example.chatapp.domain.model
 
-class CountriesModel : ArrayList<CountriesModelItem>()
+data class CountriesModel(
+    val countriesList: ArrayList<CountriesModelItem>
+)
